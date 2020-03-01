@@ -1,21 +1,48 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from 'gatsby'
+import Img from "gatsby-image"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
+const IndexPage = ({ data:{ allStrapiPost: { edges: posts  } } }) => (
+  <Layout> 
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    {
+      posts.map(({node: post})=>{
+        return (
+          <>
+            <Link to={post.id}>
+              <h1>{post.title}</h1>
+            </Link>
+            <Img fixed={post.image.childImageSharp.fixed} />
+            <div>{post.content}</div>
+          </>
+        )
+      })
+    }
   </Layout>
 )
 
 export default IndexPage
+
+export const query = graphql`
+query HomepageQuery {
+  allStrapiPost {
+    edges {
+      node {
+        id
+        title
+        content
+        image {
+          childImageSharp {
+            fixed(height: 200, width: 200) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
