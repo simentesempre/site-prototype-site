@@ -41,7 +41,7 @@ module.exports = {
         name: `Site Prototype`,
         short_name: `Site Prototype`,
         start_url: `/`,
-        background_color: `lightcoral`,
+        background_color: `white`,
         theme_color: `lightcoral`,
         display: `standalone`,
       },
