@@ -35,8 +35,17 @@ module.exports = {
         contentTypes: [`post`, `user`],
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Site Prototype`,
+        short_name: `Site Prototype`,
+        start_url: `/`,
+        background_color: `lightcoral`,
+        theme_color: `lightcoral`,
+        display: `standalone`,
+      },
+    },
+    `gatsby-plugin-offline`,
   ],
 }
